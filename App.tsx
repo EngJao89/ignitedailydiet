@@ -4,7 +4,7 @@ import { useFonts, NunitoSans_400Regular, NunitoSans_700Bold, } from '@expo-goog
 
 import theme from './src/theme';
 import { Loading } from '@components/Loading';
-import { Meals } from '@screens/Meals';
+import { Feedback } from '@screens/Feedback';
 
 
 
@@ -17,7 +17,7 @@ export default function App() {
         backgroundColor='transparent'
         translucent
       />
-      {fontsLoaded ? <Meals /> : <Loading/> }
+      {fontsLoaded ? <Feedback /> : <Loading/> }
     </ThemeProvider>
   );
 }
