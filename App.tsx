@@ -4,12 +4,13 @@ import { useFonts, NunitoSans_400Regular, NunitoSans_700Bold, } from '@expo-goog
 
 import theme from './src/theme';
 import { Loading } from '@components/Loading';
-import { EditMeals } from '@screens/EditMeals';
+import { Routes } from '@routes/index';
 
 
 
 export default function App() {
-  const [ fontsLoaded ] = useFonts({NunitoSans_400Regular, NunitoSans_700Bold})
+  const [ fontsLoaded ] = useFonts({NunitoSans_400Regular, NunitoSans_700Bold});
+
   return (
     <ThemeProvider theme={theme}>
       <StatusBar 
@@ -17,7 +18,7 @@ export default function App() {
         backgroundColor='transparent'
         translucent
       />
-      {fontsLoaded ? <EditMeals /> : <Loading/> }
+      {fontsLoaded ? <Routes /> : <Loading/> }
     </ThemeProvider>
   );
 }
