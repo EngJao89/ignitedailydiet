@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { TouchableOpacity, View, Keyboard, Platform} from 'react-native';
+import { useFocusEffect, useNavigation, useRoute, } from "@react-navigation/native";
 
 import { ButtonCheck } from "@components/ButtonChecked";
 import { ButtonIcon } from "@components/ButtonIcon";
@@ -13,6 +15,12 @@ type RouteParams = {
 }
 
 export function Meals() {
+  const navigation = useNavigation();
+  const [isDiet, setIsDiet] = useState(true);
+
+  function handleSaveMeals() {
+    navigation.navigate('feedback', {isDiet})
+  }
 
   return (
     <CardMeals
@@ -76,7 +84,10 @@ export function Meals() {
             />
           </Container>
         </Container>
-      <ButtonIcon title="Cadastrar refeição" />
+      <ButtonIcon 
+        title="Cadastrar refeição" 
+        onPress={()=> handleSaveMeals()}
+      />
     </CardMeals>
   )
 }
