@@ -1,6 +1,15 @@
-import React from "react";
-import { View } from "react-native";
-import { Button, Container, Content, Header, Icon, Title, ColorbackGround, SpaceContet } from "./styles";
+import { useNavigation } from '@react-navigation/native';
+
+import { 
+  Button, 
+  Container, 
+  Content, 
+  Header, 
+  Icon, 
+  Title, 
+  ColorbackGround, 
+  SpaceContet 
+} from "./styles";
 
 type Props = {
   children: React.ReactNode

@@ -1,3 +1,4 @@
+import { useNavigation } from '@react-navigation/native';
 import { Button, Container, Icon, SubTitle, Title } from "./styles";
 
 export function HeaderStatistic() {
@@ -5,15 +6,11 @@ export function HeaderStatistic() {
 
   function handleGoBack() {
     navigation.goBack()
-<<<<<<< Updated upstream
   };
-=======
-  }
->>>>>>> Stashed changes
 
   return (
     <Container>
-      <Button>
+      <Button onPress={() => {handleGoBack()}}>
         <Icon/>
       </Button> 
       <Title>90%</Title>
