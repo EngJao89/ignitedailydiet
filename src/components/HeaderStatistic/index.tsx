@@ -1,10 +1,16 @@
+import { useNavigation } from "@react-navigation/native";
 import { Button, Container, Icon, SubTitle, Title } from "./styles";
 
 export function HeaderStatistic() {
+  const navigation = useNavigation();
+
+  function handleGoBack() {
+    navigation.goBack()
+  };
 
   return (
     <Container>
-      <Button>
+      <Button onPress={()=>{handleGoBack()}}>
         <Icon/>
       </Button> 
       <Title>90%</Title>
