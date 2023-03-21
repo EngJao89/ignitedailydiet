@@ -5,7 +5,11 @@ export function HeaderStatistic() {
 
   function handleGoBack() {
     navigation.goBack()
+<<<<<<< Updated upstream
   };
+=======
+  }
+>>>>>>> Stashed changes
 
   return (
     <Container>
