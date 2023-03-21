@@ -1,3 +1,7 @@
+<<<<<<< Updated upstream
+=======
+import { View } from "react-native";
+>>>>>>> Stashed changes
 import { useNavigation } from '@react-navigation/native';
 import { 
   Button, 
