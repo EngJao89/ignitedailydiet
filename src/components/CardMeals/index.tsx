@@ -1,6 +1,15 @@
-import React from "react";
 import { View } from "react-native";
-import { Button, Container, Content, Header, Icon, Title, ColorbackGround, SpaceContet } from "./styles";
+import { useNavigation } from '@react-navigation/native';
+import { 
+  Button, 
+  Container, 
+  Content, 
+  Header, 
+  Icon, 
+  Title, 
+  ColorbackGround, 
+  SpaceContet 
+} from "./styles";
 
 type Props = {
   children: React.ReactNode
@@ -10,11 +19,16 @@ type Props = {
 }
 
 export function CardMeals({ children, title, color, space }: Props) {
+  const navigation = useNavigation();
+
+  function handleGoBack() {
+    navigation.goBack()
+  };
 
   return (
     <Container>
       <Header color={color}>
-        <Button>
+        <Button onPress={() => {handleGoBack()}}>
           <Icon/>
         </Button>
         <Title>{title}</Title>

@@ -1,6 +1,11 @@
 import { Button, Container, Icon, SubTitle, Title } from "./styles";
 
 export function HeaderStatistic() {
+  const navigation = useNavigation();
+
+  function handleGoBack() {
+    navigation.goBack()
+  };
 
   return (
     <Container>
