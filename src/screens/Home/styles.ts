@@ -16,6 +16,7 @@ export const Subtitle = styled.Text`
     margin-top: 40px;
   `};
 `;
+
 export const HeaderSection = styled.View`
   background-color: ${({ theme }) => theme.COLORS.WHITE};
 `
