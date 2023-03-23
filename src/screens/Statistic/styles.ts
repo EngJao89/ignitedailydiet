@@ -3,7 +3,6 @@ import styled, {css} from "styled-components/native";
 
 export const Container  = styled.View`
   flex: 1;
-  /* background-color: ${({ theme }) => theme.COLORS.GREEN_MID}; */
 `;
 
 export const Page = styled.View`
@@ -29,7 +28,3 @@ export const ContainerStatistic = styled.View`
   justify-content: space-between;
   width:100%;
 `
-
-
-
-
