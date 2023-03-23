@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { TouchableOpacity, View, Keyboard, Platform} from 'react-native';
-import { useNavigation, useRoute } from "@react-navigation/native";
+import { useFocusEffect, useNavigation, useRoute } from "@react-navigation/native";
 import DateTimePicker from '@react-native-community/datetimepicker';
 import StorageMeals, { MealsType } from "@storage/Meals";
 
@@ -19,15 +19,16 @@ type RouteParams = {
 export function Meals() {
   const navigation = useNavigation()
   const route = useRoute();
-
-  const [isDiet, setIsDiet] = useState(true);
-  const [datePicker, setDatePicker] = useState(false);
-  const [timePicker, setTimePicker] = useState(false);
-  const [description, setDescrition] = useState('');
+  const { id } = route.params as RouteParams;
 
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
-  const { id } = route.params as RouteParams;
+  const [name, setName] = useState('');
+  const [description, setDescrition] = useState('');
+
+  const [datePicker, setDatePicker] = useState(false);
+  const [timePicker, setTimePicker] = useState(false);
+  const [isDiet, setIsDiet] = useState(true);
 
   function handleSaveMeals() {
     const newid: string = new Date().toISOString().replace(/[^a-zA-Z0-9 ]/g, '')
@@ -37,7 +38,7 @@ export function Meals() {
     navigation.navigate('feedback', {isDiet})
   }
 
-  function showDateTimePicker(type: TypeMode ) {
+function showDateTimePicker(type: TypeMode ) {
     if(type === 'date') setDatePicker(true);
     else setTimePicker(true);
   };
@@ -54,6 +55,35 @@ export function Meals() {
     }
     
   };
+
+  function handleSetDiet(value: string) {
+    if(value === 'istDiet') setIsDiet(true)
+    else setIsDiet(false)
+  }
+
+  async function handleUpdatedMeals(){
+    let meals = {id, name, description, date, time, isDiet}
+    await StorageMeals.updated(meals)
+    navigation.navigate('feedback', {isDiet})
+  }
+
+  
+
+  async function fetchMeals() {
+    const meal = await StorageMeals.findOne(id)
+
+    setDate(meal?.date ? meal.date : '')
+    setTime(meal?.time ? meal.time : '')
+    setIsDiet(meal?.isDiet !== undefined ? meal.isDiet : false)
+    setDescrition(meal?.description ? meal.description : '')
+    setName(meal?.name ?meal.name : '')
+  }
+
+  useFocusEffect(useCallback(()=>{
+    if(id){
+      fetchMeals();
+    }
+  }, []))
 
   return (
     <CardMeals
@@ -76,13 +106,19 @@ export function Meals() {
 
         <Input
           title="Nome"
+          onChangeText={text => setName(text)}
+          value={name}
+          onBlur={Keyboard.dismiss}
         />
 
         <Input
           title="Descrição"
           multiline = {true}
           numberOfLines = {7}
+          onChangeText={setDescrition}
+          value={description}
           textAlignVertical="top"
+          onBlur={Keyboard.dismiss}
         />
 
         <Container width={100} direction='row'>
@@ -103,11 +139,11 @@ export function Meals() {
             <TouchableOpacity onPress={()=> showDateTimePicker('time')}>
               <View pointerEvents="none">
                 <Input
-                    title="Hora"
-                    numberOfLines = {1}
-                    editable={false}
-                    value={time}
-                    defaultValue={time}
+                  title="Hora"
+                  numberOfLines = {1}
+                  editable={false}
+                  value={time}
+                  defaultValue={time}
                 />
               </View>
             </TouchableOpacity>
@@ -120,7 +156,8 @@ export function Meals() {
                 title="Sim"
                 color="GREEN_DARK"
                 backgroundColor="GREEN_LIGHT"
-                active={false}
+                onPress={()=> handleSetDiet('istDiet')}
+                active={isDiet ? true : false}
               />
             </Container>
 
@@ -128,15 +165,18 @@ export function Meals() {
               <ButtonCheck
                 title="Não"
                 color="RED_DARK"
-                backgroundColor="RED_LIGHT" 
-                active={false}        
+                backgroundColor="RED_LIGHT"
+                onPress={()=> handleSetDiet('notDiet')}
+                active={!isDiet ? true : false}      
               />
             </Container>
           </Container>
-        <ButtonIcon 
-          title="Cadastrar refeição" 
-          onPress={()=> handleSaveMeals()}
-        />
+          {id 
+            ?
+            <ButtonIcon title="Salvar altração" onPress={()=> handleUpdatedMeals()} />
+            :
+            <ButtonIcon title="Cadastrar refeição" onPress={()=> handleSaveMeals()} />
+          }
     </CardMeals>
   )
 }
