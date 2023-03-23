@@ -2,11 +2,13 @@ import styled, {css} from "styled-components/native";
 import { ArrowLeft } from 'phosphor-react-native'
 import {TouchableOpacity} from 'react-native'
 
+type Props = {
+  isDiet: boolean
+}
 
-
-export const Container = styled.View`
+export const Container = styled.View<Props>`
   height: 180px;
-  background-color: ${({theme}) => theme.COLORS.GREEN_MID};
+  background-color: ${({theme, isDiet}) => isDiet ? theme.COLORS.GREEN_MID : theme.COLORS.RED_MID};
   align-items: center ;
   padding-top: 70px;
 `;
@@ -38,7 +40,7 @@ export const Button = styled(TouchableOpacity)`
 `;
 
 
-export const Icon = styled(ArrowLeft)`
-  size:25;
-  color: ${({theme}) => theme.COLORS.GREEN_MID};
-`
+export const Icon = styled(ArrowLeft).attrs<Props>(({ theme, isDiet })=> ({
+  size:25,
+  color:  isDiet ? theme.COLORS.GREEN_DARK : theme.COLORS.RED_DARK,
+}))``
