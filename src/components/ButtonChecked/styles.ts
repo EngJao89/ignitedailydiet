@@ -4,7 +4,6 @@ import styled, {css} from 'styled-components/native';
 export type ColorType = 'GREEN_DARK' | 'RED_DARK' 
 export type BackGroundColorType = 'GREEN_LIGHT' | 'RED_LIGHT'
 
-
 type PropsColorButton = {
   color: ColorType
   active: boolean

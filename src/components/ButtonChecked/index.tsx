@@ -1,5 +1,11 @@
 import { TouchableOpacityProps } from "react-native";
-import { Boll, Container, Title, ColorType, BackGroundColorType } from "./styles";
+import { 
+  Boll, 
+  Container, 
+  Title, 
+  ColorType, 
+  BackGroundColorType 
+} from "./styles";
 
 
 type Props = TouchableOpacityProps & {
@@ -10,7 +16,13 @@ type Props = TouchableOpacityProps & {
 }
 
 
-export function ButtonCheck({active, color, title, backgroundColor, ...rest}: Props) {
+export function ButtonCheck({
+  active, 
+  color, 
+  title, 
+  backgroundColor, 
+  ...rest
+}: Props) {
   return (
     <Container 
       {...rest}
