@@ -1,29 +1,43 @@
-import { useNavigation } from '@react-navigation/native';
-import { Container, Logo, Subtitle, Title } from "./styles";
-import FeedbackPositive from '@assets/feedbackPositive.png'
-import FeedbackNegative from '@assets/feedbackNegative.png'
+import { useRoute, useNavigation } from '@react-navigation/native';
+import FeedbackPositive from '@assets/feedbackPositive.png';
+import FeedbackNegative from '@assets/feedbackNegative.png';
+
+import { 
+  Container, 
+  Logo, 
+  Subtitle, 
+  Title 
+} from "./styles";
+
 import { ButtonIcon } from "@components/ButtonIcon";
 
+type RouteParams = {
+  isDiet:boolean;
+}
 
 export function Feedback() {
-  const navigation = useNavigation();
+  const route = useRoute();
+  const navigation = useNavigation()
+  const { isDiet } = route.params as RouteParams
 
   function handleGoHome(){
     navigation.navigate('home')
-  };
+  }
 
   return(
     <Container>
-      <Title>Continue assim!</Title>
+      <Title isDiet={isDiet}> {isDiet ? 'Continue assim!' : 'Que pena!'}</Title>
       <Subtitle>
         {
-          'Você continua dentro da dieta. Muito bem!'
+          isDiet 
+          ? 'Você continua dentro da dieta. Muito bem!'
+          : 'Você saiu da dieta dessa vez, mas continue se esforçando e não desista!'
         }
       </Subtitle>
-      <Logo source={FeedbackPositive } />
+      <Logo source={ isDiet ? FeedbackPositive : FeedbackNegative } />
       <ButtonIcon 
         title="Ir para a página inicial"
-        onPress={() => handleGoHome()}
+        onPress={()=> handleGoHome()}
       />
     </Container>
   )
