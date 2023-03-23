@@ -11,10 +11,10 @@ export const Container = styled.View`
   background-color: ${({theme}) => theme.COLORS.WHITE} ;
 `
 
-export const Title = styled.Text`
-  ${({ theme })=> css`
+export const Title = styled.Text<Props>`
+  ${({ theme, isDiet })=> css`
     font-size: ${theme.FONT_SIZE.TEXT_LX}px;
-    color: ${theme.COLORS.GREEN_DARK};
+    color: ${ isDiet ? theme.COLORS.GREEN_DARK : theme.COLORS.RED_DARK};
     font-family: ${theme.FONT_FAMILY.BOLD};
     font-weight:700;
   `}
