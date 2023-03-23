@@ -1,10 +1,31 @@
+import { useCallback, useState } from "react";
+import { useFocusEffect } from "@react-navigation/native";
+import { useTheme } from 'styled-components/native';
+import StorageMeals from '@storage/Meals';
+
+import { 
+  Container, 
+  ContainerStatistic, 
+  Page, 
+  Title 
+} from "./styles";
+
 import { CardStatistic } from "@components/CardStatistic";
 import { HeaderStatistic } from "@components/HeaderStatistic";
-import { useTheme } from 'styled-components/native'
-import { Container, ContainerStatistic, Page, Title } from "./styles";
 
-export function Statistic() {
+export default function Statistic() {
   const { COLORS } = useTheme();
+
+  const [totalMeals, setTotalMeals] = useState(0);
+  const [totalMealsInsedeDiet, setTotalMealsInsedeDiet] = useState(0);
+  const [totaltotalOutsideDiet, setTotaltotalOutsideDiet] = useState(0);
+
+
+  useFocusEffect(useCallback(()=>{
+    setTotalMeals(StorageMeals.totalMeals)
+    setTotalMealsInsedeDiet(StorageMeals.totalInsedeDiet)
+    setTotaltotalOutsideDiet(StorageMeals.totalOutsideDiet)
+  }, []))
 
   return (
     <Container>
@@ -12,26 +33,27 @@ export function Statistic() {
       <Page>
         <Title>Estatísticas gerais</Title>
         <CardStatistic 
-          title={22}
-          subtitle="melhor sequência de pratos dentro da dieta"
-          color={COLORS.GRAY_6}
+          title={totalMealsInsedeDiet}
+          subtitle= "melhor sequência de pratos dentro da dieta"
+          color={COLORS.GRAY_7}
         />
         <CardStatistic 
-          title={109}
-          subtitle="refeições registradas"
-          color={COLORS.GRAY_6}
+          title={totalMeals}
+          subtitle= "refeições registradas"
+          color={COLORS.GRAY_7}
         />
+
         <ContainerStatistic >
         <CardStatistic 
           size={48}
-          title={99}
-          subtitle="refeições dentro da dieta"
+          title={totalMealsInsedeDiet}
+          subtitle= "refeições dentro da dieta"
           color={COLORS.GREEN_LIGHT}
         />
         <CardStatistic 
           size={48}
-          title={10}
-          subtitle="refeições fora da dieta"
+          title={totaltotalOutsideDiet}
+          subtitle= "refeições fora da dieta"
           color={COLORS.RED_LIGHT}
         />
         </ContainerStatistic>
