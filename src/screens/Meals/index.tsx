@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { TouchableOpacity, View, Keyboard, Platform} from 'react-native';
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import DateTimePicker from '@react-native-community/datetimepicker';
+import StorageMeals, { MealsType } from "@storage/Meals";
 
 import { ButtonCheck } from "@components/ButtonChecked";
 import { ButtonIcon } from "@components/ButtonIcon";
@@ -16,15 +17,23 @@ type RouteParams = {
 }
 
 export function Meals() {
-  const navigation = useNavigation();
+  const navigation = useNavigation()
+  const route = useRoute();
 
   const [isDiet, setIsDiet] = useState(true);
   const [datePicker, setDatePicker] = useState(false);
   const [timePicker, setTimePicker] = useState(false);
+  const [description, setDescrition] = useState('');
+
   const [date, setDate] = useState('');
   const [time, setTime] = useState('');
+  const { id } = route.params as RouteParams;
 
   function handleSaveMeals() {
+    const newid: string = new Date().toISOString().replace(/[^a-zA-Z0-9 ]/g, '')
+
+    let newMeals = {id: newid, name, description, date, time, isDiet}
+    StorageMeals.created(newMeals)
     navigation.navigate('feedback', {isDiet})
   }
 
