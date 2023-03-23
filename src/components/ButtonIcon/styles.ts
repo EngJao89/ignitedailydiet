@@ -27,7 +27,3 @@ export const Title = styled.Text<Props>`
     margin-left: ${hasIcon ? '12px' : '0px'}
   `}
 `
-
-
-
-

@@ -1,6 +1,13 @@
-import { View, TouchableOpacityProps } from "react-native";
+import { TouchableOpacityProps } from "react-native";
 
-import { Container, Subtitle, Title, CardHeader, VerticalLine, Status  } from "./styles";
+import { 
+  Container, 
+  Subtitle, 
+  Title, 
+  CardHeader, 
+  VerticalLine, 
+  Status  
+} from "./styles";
 
 type Props = TouchableOpacityProps & {
   date:string;

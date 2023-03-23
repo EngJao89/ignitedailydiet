@@ -1,3 +1,4 @@
+import React from "react";
 import { useNavigation } from '@react-navigation/native';
 
 import { 
@@ -19,11 +20,11 @@ type Props = {
 }
 
 export function CardMeals({ children, title, color, space }: Props) {
-  const navigation = useNavigation();
+  const navigation = useNavigation()
 
   function handleGoBack() {
     navigation.goBack()
-  };
+  }
 
   return (
     <Container>
