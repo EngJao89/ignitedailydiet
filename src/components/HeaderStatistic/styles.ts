@@ -42,5 +42,5 @@ export const Button = styled(TouchableOpacity)`
 
 export const Icon = styled(ArrowLeft).attrs<Props>(({ theme, isDiet })=> ({
   size:25,
-  color:  isDiet ? theme.COLORS.GREEN_DARK : theme.COLORS.RED_DARK,
-}))``
+  color: theme.COLORS.GREEN_DARK,
+}))``;
