@@ -13,7 +13,7 @@ import {
 import { CardStatistic } from "@components/CardStatistic";
 import { HeaderStatistic } from "@components/HeaderStatistic";
 
-export default function Statistic() {
+export function Statistic() {
   const { COLORS } = useTheme();
 
   const [totalMeals, setTotalMeals] = useState(0);
